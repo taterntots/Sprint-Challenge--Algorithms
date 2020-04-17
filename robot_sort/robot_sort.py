@@ -96,8 +96,32 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        # Swap items with index zero
+        self.swap_item()
+        print(f'STARTING ITEM', self._item)
+
+        # while self.compare_item() == -1 or self.compare_item() == None:
+        
+        while self.can_move_right() == True:
+            self.move_right()
+
+            if self.compare_item() == 1:
+                print(True)
+                self.swap_item()
+                print(f'HELD ITEM', self._item)
+                print(f'CURRENT POSITION', self._position)
+        else:
+            if self.can_move_right() == False:
+                print(f'HELD ITEM', self._item)
+                self.swap_item()
+
+        # while self.can_move_left() == True:
+        #     if self.can_move_right() == False:
+        #         if self.compare_item() == -1:
+        #             print(True)
+        #             self.swap_item()
+        #             self.move_left()
+        #             print(f'NEW CURRENT POSITION', self._position)
 
 
 if __name__ == "__main__":
@@ -110,3 +134,36 @@ if __name__ == "__main__":
 
     robot.sort()
     print(robot._list)
+
+
+# -------------------------------
+# UNDERSTANDING THE PROBLEM
+# -------------------------------
+
+# We have a robot that can only move from left to right, 
+# swapping out items (in this case integers) with the one it's currently
+# holding to the one in front (to the right of it). We need to program
+# the robot to sort a given list of items (again, integers) using the
+# abilities given to us.
+
+# By the look of things, the problem sounds somehwat similar to bubble
+# sorting, but not quite. If we can get the robot to start from position 
+# zero (the start of our list), we can have it move from left to right, 
+# finding and carrying the smallest integer in the list. Once it reaches the end of 
+# the list, we drop the smallest integer and send it all the way back towards the 
+# left until it reaches the start of the list again. Then it repeats the process until
+# the list is sorted.
+
+# -------------------------------
+# PLANNING
+# -------------------------------
+
+# Have the robot start from the beginning of the list (index zero)
+# If the current item is larger than the next item to the right:
+    # Pick up the item
+    # Move one space to the right
+    # Swap for new item
+# Keep swapping items until you get to the end of the array
+# If the robot can no longer move to the right:
+    # Swap the last integer with the smallest and send the robot back to the beginning of the list and re
+# Repeate from the top
